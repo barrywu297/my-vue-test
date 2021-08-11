@@ -1,9 +1,11 @@
 <template>
   <div id="nav">
-    <router-link to="/">首页</router-link> |
-    <!-- <router-link to="/about">About</router-link> | -->
-    <router-link to="/cart">管理</router-link>
-    <router-view/>
+    <router-link to="/">首页</router-link>|
+    <router-link to="/cart">管理</router-link>|
+    <router-link to="/about">关于</router-link> 
+    <keep-alive include="['about', 'Cart']"> 
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 

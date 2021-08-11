@@ -7,11 +7,15 @@
 
 <script>
 export default {
-    setup () {
-        
-
-        return {}
-    }
+   watch: {
+       $route: {
+           immediate: true,
+        //    deep: true,
+           handler() {
+               console.log("$route change");
+           }
+       }
+   },
 }
 </script>
 

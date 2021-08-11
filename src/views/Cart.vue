@@ -77,6 +77,13 @@ export default {
       });
     }
   },
+  beforeRouteEnter(to, from, next) {
+    if (window.isLogin) {
+        next();
+    } else {
+        next('/login?redirect=' + to.fullPath);
+    }
+  }
 }
 </script>
 

@@ -4,13 +4,16 @@
         <div v-if="courses.length == 0">没有任何信息</div>
         <!-- 列表渲染 -->
         <div :class="$style.courseList" v-else>
-            <div v-for="c in courses" :class = "{ active : selectCourse.name === c.name}" :key="c.name" @click=" selectCourse = c ">
-                <!-- {{ c.name }} - {{ getCurrency(c) }} -->
-                <router-link :to="`/course/${c.name}`"> 
+            <!-- 修改为课程详情跳转为编程导航 -->
+            <div v-for="c in courses" :class = "{ active : selectCourse.name === c.name}" :key="c.name" @click="setCourseAndRouter(c)">
+                {{ c.name }} - {{ getCurrency(c) }}
+                <!-- <router-link :to="`/cart/${c.name}`"> 
                     {{ c.name }} - {{ getCurrency(c) }} 
-                </router-link>
+                </router-link> -->
             </div>
         </div>
+        <router-link :to="{ name: 'course', params: { name: '对象测试' }}">对象测试</router-link>
+        <router-view/>
         <!-- 利用transition-group可以对v-for渲染的每个元素应用过度 -->
         <!-- <transition-group name="fade"> 
             <div v-for="c in courses" :key="c.name"> 
@@ -27,7 +30,6 @@
         data() {
             return {
                 selectCourse: '',
-                coursePrice: ''
             }
         },
         props: {
@@ -44,6 +46,16 @@
             getCurrency(c) {
                 const result = "$" + c.price;
                 return result;
+            },
+            setCourseAndRouter(c){
+                this.selectCourse = c;
+                // 字符串
+                // this.$router.push(`/cart/${c.name}`);
+                // 对象
+                this.$router.push({
+                    name: 'course', 
+                    params: { name: c.name }
+                });
             }
         }
     }
